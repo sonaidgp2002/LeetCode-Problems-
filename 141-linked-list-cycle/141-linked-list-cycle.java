@@ -11,15 +11,16 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        ListNode temp=head;
-        ArrayList<ListNode> arr=new ArrayList<>();
-        while(temp!=null)
+        if(head==null)
+            return false;
+        ListNode curr=head;
+        ListNode fast=head;
+        while(fast.next!=null && fast.next.next!=null)
         {
-            if(arr.contains(temp))
+            curr=curr.next;
+            fast=fast.next.next;
+            if(curr==fast)
                 return true;
-            else
-                arr.add(temp);
-            temp=temp.next;
         }
         return false;
     }

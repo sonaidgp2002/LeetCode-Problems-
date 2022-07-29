@@ -13,14 +13,12 @@ class Solution {
         ListNode t=head;
         ListNode prev=null;
         ListNode head1=null;
-        int c=0;
         while(t!=null)
         {
             if(t.val!=val)
             {
-                c++;
-                ListNode t1=new ListNode(t.val);
-                if(c==1)
+                ListNode t1 = new ListNode(t.val);
+                if(head1==null)
                 {
                     head1=t1;
                     prev=t1;

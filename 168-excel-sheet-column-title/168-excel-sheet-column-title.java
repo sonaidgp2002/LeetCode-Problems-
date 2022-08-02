@@ -7,7 +7,6 @@ class Solution {
             sb.append((char)(n % 26 + 'A'));
             n /= 26;
         }
-        sb = sb.reverse();
-        return sb.toString();
+        return sb.reverse().toString();
     }
 }

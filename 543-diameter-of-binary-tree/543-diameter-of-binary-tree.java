@@ -21,7 +21,6 @@ class Solution {
         if(( lh + rh) > max)
             max = lh + rh;
         return max;
-        //return (lh + rh);
     }
     public int length(TreeNode root)
     {

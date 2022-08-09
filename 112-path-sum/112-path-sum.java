@@ -18,8 +18,7 @@ class Solution {
         if(root == null)
             return false;
         ArrayList<Integer> str = new ArrayList<>();
-        int sum = 0;
-        root_leaf(root, sum, str);
+        root_leaf(root, 0, str);
         if(str.contains(targetSum))
             return true;
         return false;

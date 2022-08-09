@@ -25,8 +25,6 @@ class Solution {
             if((arr.get(i+1) - arr.get(i)) < diff)
                 diff = arr.get(i+1) - arr.get(i);
         }
-        // if(arr.size() >= 2)
-        //     return (arr.get(1) - arr.get(0));
         return diff;
     }
     public void preorder(TreeNode root, ArrayList<Integer> arr)

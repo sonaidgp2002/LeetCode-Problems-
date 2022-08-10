@@ -23,10 +23,7 @@ class Solution {
         if(root == null)
             return;
         if(root.left != null && root.left.left == null && root.left.right == null)
-        {
             sum += root.left.val;
-            System.out.println(sum);
-        }
         traversal(root.left);
         traversal(root.right);
     }

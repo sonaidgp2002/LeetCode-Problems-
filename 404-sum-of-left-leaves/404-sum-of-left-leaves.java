@@ -15,9 +15,7 @@
  */
 class Solution {
     int sum = 0;
-    public int sumOfLeftLeaves(TreeNode root) { 
-        // if( root == null)
-        //     return 0;
+    public int sumOfLeftLeaves(TreeNode root) {
         traversal(root);
         return sum;
     }

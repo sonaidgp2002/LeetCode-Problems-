@@ -54,9 +54,5 @@ class Solution{
             stk.push(arr[i]);
         }
         return nums;
-        // int res[] = new int[nums.size()];
-        // for(int i=0;i<nums.size();i++)
-        // res[i] = nums.get(i);
-        // return res;
     }
 }

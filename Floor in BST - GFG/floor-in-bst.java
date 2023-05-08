@@ -61,24 +61,18 @@ class GFG {
 // User function Template for Java
 
 class Solution {
-    public static int floor(Node root, int x) {
+    public static int floor(Node root, int key) {
         // Code here
-        int ceil = -1;
-        while(root!=null)
+        int floor = -1;
+        while(root != null)
         {
-            if(root.data == x)
-            {
-                ceil = x;
-                break;
-            }
-            if(root.data < x)
-            {
-                ceil = root.data;
+            if(root.data <= key && root.data > floor)
+                floor = root.data;
+            if(root.data < key)
                 root = root.right;
-            }
             else
-            root = root.left;
+                root = root.left;
         }
-        return ceil;
+     return(floor);
     }
 }

@@ -130,70 +130,63 @@ class Solution
     public static int minTime(Node root, int target) 
     {
         // Your code goes here
-        Node targ = find_target(root, target);
-        Queue<Node> q = new LinkedList<>();
-        HashMap<Node, Node> hash = new HashMap<>();
-        ArrayList<Node> visited = new ArrayList<>();
-        int distance = -1;
-        q.add(root);
-        while(q.size()>0)
-        {
-            int size = q.size();
-            for(int i=0;i<size;i++)
-            {
-                Node t = q.poll();
-                if(t.left!=null)
-                {
-                    q.add(t.left);
-                    hash.put(t.left, t);
-                }
-                if(t.right!=null)
-                {
-                    q.add(t.right);
-                    hash.put(t.right, t);
-                }
-            }
-        }
-        q.clear();
-        q.add(targ);
-        while(q.size()>0)
-        {
-            distance++;
-            int size = q.size();
-            for(int i=0;i<size;i++)
-            {
-                Node t = q.poll();
-                if(t.left!=null && !visited.contains(t.left))
-                {
-                    q.add(t.left);
-                    visited.add(t.left);
-                }
-                if(t.right!=null && !visited.contains(t.right))
-                {
-                    q.add(t.right);
-                    visited.add(t.right);
-                }
-                if(hash.containsKey(t) && !visited.contains(hash.get(t)))
-                {
-                    q.add(hash.get(t));
-                    visited.add(hash.get(t));
-                }
-            }
-        }
-        return(distance);
+        HashMap<Node, Node> parent = new HashMap<>();
+        find_parent(root, parent);
+        Node target_get = find_target(root, target);
+        return(find_distant_node(target_get, parent, 0));
     }
-    static Node find_target(Node root, int target)
+    public static Node find_target(Node root, int val)
     {
         if(root == null)
-            return null;
-        if(root.data == target)
             return root;
-        Node l = find_target(root.left, target);
-        Node r = find_target(root.right, target);
-        if(l!=null)
-            return l;
-        if(r!=null)
+        if(root.data == val)
+            return root;
+        Node l = find_target(root.left, val);
+        Node r = find_target(root.right, val);
+        if(l == null)
             return r;
-        return null;
+        if(r == null)
+            return l;
+        return l;
+    }
+    public static int find_distant_node(Node root, HashMap<Node, Node> parent, int k)
+    {
+        if(root == null)
+            return 0;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        List<Integer> visited = new ArrayList<>();
+        while (q.size() > 0)
+        {
+            k++;
+            int size = q.size();
+            for(int i=0;i<size;i++)
+            {
+                Node t = q.poll();
+                visited.add(t.data);
+                if(t.left != null && !visited.contains(t.left.data))
+                    q.add(t.left);
+                if(t.right != null && !visited.contains(t.right.data))
+                    q.add(t.right);
+                if(parent.containsKey(t) && !visited.contains(parent.get(t).data))
+                    q.add(parent.get(t));
+            }
+        }
+        return k-1;
+    }
+    public static void find_parent(Node root, HashMap<Node, Node> parent)
+    {
+        if(root == null)
+            return;
+        if(root.left != null)
+        {
+            parent.put(root.left, root);
+            find_parent(root.left, parent);
+        }
+        if(root.right != null)
+        {
+            parent.put(root.right, root);
+            find_parent(root.right, parent);
+        }
     }
 }

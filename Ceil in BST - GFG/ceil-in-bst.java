@@ -110,18 +110,23 @@ class Tree {
     int findCeil(Node root, int key) {
         if (root == null) return -1;
         // Code here
-        int ceil = Integer.MAX_VALUE;
-        while(root != null)
+        return find(root, key);
+    }
+    public int find(Node root, int val)
+    {
+        Node temp = null;
+        while (root != null)
         {
-            if(root.data >= key && root.data < ceil)
-                ceil = root.data;
-            if(root.data < key)
+            if(val > root.data){
                 root = root.right;
-            else
+            }
+            else {
+                temp = root;
                 root = root.left;
+            }
         }
-        if(ceil == Integer.MAX_VALUE)
+        if(temp == null)
             return -1;
-        return(ceil);
+        return temp.data;
     }
 }

@@ -62,17 +62,30 @@ class GFG {
 
 class Solution {
     public static int floor(Node root, int key) {
+        if (root == null) return -1;
         // Code here
-        int floor = -1;
-        while(root != null)
+        return find(root, key);
+    }
+    public static int find(Node root, int val)
+    {
+        Node temp = null;
+        while (root != null)
         {
-            if(root.data <= key && root.data > floor)
-                floor = root.data;
-            if(root.data < key)
+            if(root.data == val)
+            {
+                temp = root;
+                break;
+            }
+            if(val > root.data){
+                temp = root;
                 root = root.right;
-            else
+            }
+            else {
                 root = root.left;
+            }
         }
-     return(floor);
+        if(temp == null)
+            return -1;
+        return temp.data;
     }
 }

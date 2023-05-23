@@ -1,6 +1,7 @@
 # Rod Cutting
 ## Medium
-<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a rod of length <strong>N</strong> inches and an array of prices,&nbsp;<strong>price[]</strong>. <strong>price<sub>i</sub></strong>&nbsp;denotes the value of a piece of length <strong>i</strong>.&nbsp;Determine the maximum value obtainable by cutting up the rod and selling the pieces.</span></p>
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a rod of length <strong>N</strong> inches and an array of prices,&nbsp;<strong>price[]</strong>. <strong>price<sub>i</sub></strong>&nbsp;denotes the value of a piece of length <strong>i</strong>.&nbsp;Determine the maximum value obtainable by cutting up the rod and selling the pieces.<br>
+<strong>Note:</strong>&nbsp;Consider 1-based indexing.</span></p>
 
 <p>&nbsp;</p>
 

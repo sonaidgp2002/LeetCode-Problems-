@@ -56,11 +56,8 @@ class Solution {
         dfs(graph, stk, visited, 0);
         while(!stk.isEmpty()){
             int node = stk.pop();
-            for(Pair it: graph.get(node)){
-                int sum = it.weight + distance[node];
-                if(sum < distance[it.node])
-                    distance[it.node] = sum;
-            }
+            for(Pair it: graph.get(node))
+                distance[it.node] = Math.min(distance[it.node], it.weight + distance[node]);
         }
         for(int i=0;i<n;i++)
             if(distance[i] == Integer.MAX_VALUE)

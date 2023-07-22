@@ -53,6 +53,12 @@ class Solution
         }
     }
     public static void merge(long[] arr, int l, int mid, int h, long[] count){
+        int j = mid +1;
+        for(int i=l;i<=mid;i++){
+            while(j <= h && arr[i] > ((long)arr[j]))
+                j++;
+            count[0] += j - (mid + 1);
+        }
         int n1 = (mid - l + 1);
         int n2 = (h - mid);
         long[] left = new long[n1];
@@ -61,7 +67,8 @@ class Solution
             left[i] = arr[l + i];
         for(int i=0;i<n2;i++)
             right[i] = arr[mid + 1 + i];
-        int k = l, i = 0, j = 0;
+        int k = l, i = 0;
+        j = 0;
         while(i < n1 && j < n2){
             if(left[i] <= right[j]){
                 arr[k] = left[i];
@@ -70,7 +77,7 @@ class Solution
             else {
                 arr[k] = right[j];
                 j++;
-                count[0] += (n1 - i);
+                // count[0] += (n1 - i);
             }
             k++;
         }

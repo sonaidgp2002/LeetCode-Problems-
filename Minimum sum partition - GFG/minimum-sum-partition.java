@@ -31,53 +31,30 @@ class Solution
 	public int minDifference(int arr[], int n) 
 	{ 
 	    // Your code goes here
-	    int range=0;
+	    int sum = 0;
+	    for(int i=0;i<n;i++)
+	        sum += arr[i];
+	    boolean[][] dp = new boolean[n][sum+1];
         for(int i=0;i<n;i++)
-        {
-            range += arr[i];
-        }
-        Boolean dp[][] = new Boolean[n+1][range+1];
-        for(int i=0;i<n+1;i++) {
-            for (int j = 0; j < range + 1; j++) {
-                dp[i][j] = false;
+            dp[i][0] = true;
+        if(arr[0] <= sum)
+            dp[0][arr[0]] = true;
+        for(int i=1;i<n;i++){
+            for(int j = 0;j<=sum;j++){
+                boolean take = false;
+                if(arr[i] <= j)
+                    take = dp[i-1][j - arr[i]];
+                boolean nottake = dp[i-1][j];
+                dp[i][j] = take | nottake;
             }
         }
-        for(int i=0;i<n+1;i++)
-        {
-            for(int j=0;j<range+1;j++)
-            {
-                if(i==0 && j==0)
-                    dp[i][j] = true;
-                else if(j==0)
-                    dp[i][j] = true;
-            }
+        int min = Integer.MAX_VALUE;
+        for(int i=0;i<=sum;i++){
+            if(dp[n-1][i] == true)
+                min = Math.min(min, Math.abs((sum - i) - i));
         }
-        for(int i=1;i<n+1;i++)
-        {
-            for(int j=0;j<range+1;j++)
-            {
-                Boolean take1 = false;
-                Boolean nottake1 = false;
-                if(arr[i-1]<=j)
-                {
-                    take1 = dp[i-1][j-arr[i-1]];
-                }
-                nottake1 = dp[i-1][j];
-                dp[i][j] = (take1 || nottake1);
-            }
-        }
-        ArrayList<Integer> arr1 = new ArrayList<>();
-        for(int i=0;i<=range/2;i++)
-        {
-            if(dp[n][i] == true)
-            arr1.add(i);
-        }
-        int min = (int)10e8;
-        for(int i=0;i<arr1.size();i++)
-        {
-            if((range-2*arr1.get(i)) < min)
-                min = (range-2*arr1.get(i));
-        }
+        if(min == Integer.MAX_VALUE)
+            return -1;
         return min;
 	} 
 }

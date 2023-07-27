@@ -49,64 +49,26 @@ class gfg
 class Solution 
 { 
     //Function to return max value that can be put in knapsack of capacity W.
-    static int knapSack(int W, int wt[], int val[], int n) 
+    static int knapSack(int w, int weight[], int values[], int n) 
     { 
-        // int dp[][] = new int[n+1][W+1];
-        // for(int i=0;i<n+1;i++)
-        //     for(int j=0;j<W+1;j++)
-        //     dp[i][j] = -1;
-        // return check(W, wt, val, n-1, dp);
-        int dp[][] = new int[n+1][W+1];
-        for(int i=0;i<n+1;i++)
-            for(int j=0;j<W+1;j++)
-            {
-                if(i==0)
-                dp[i][j] = 0;
-                if(j==0)
-                dp[i][j] = 0;
-            }
-        for(int i=1;i<n+1;i++)
-            for(int j=1;j<W+1;j++)
-            {
-                if(wt[i-1]<=j)
-                {
-                    int take = val[i-1] + dp[i-1][j-wt[i-1]];
-                    int nottake = dp[i-1][j];
-                    dp[i][j] = Math.max(take, nottake);
+         // your code here 
+        int[][] dp = new int[n][w+1];
+        for(int i=0;i<=w;i++)
+            if(weight[0] <= i)
+                dp[0][i] = values[0];
+        for(int i=1;i<n;i++){
+            for(int j=1;j<=w;j++){
+                int take = 0;
+                if(weight[i] <= j){
+                    take = values[i] + dp[i-1][j - weight[i]];
                 }
-                else
-                {
-                    dp[i][j] = dp[i-1][j];
-                }
+                int nottake = dp[i-1][j];
+                dp[i][j] = Math.max(take, nottake);
             }
-        return dp[n][W];
+        }
+        return(dp[n-1][w]);
     } 
-    // static int check(int W, int wt[], int val[], int n, int dp[][])
-    // {
-    //     if(W==0)
-    //      return 0;
-    //      if(n==0)
-    //      {
-    //          if(wt[n]<=W)
-    //          return val[n];
-    //          return 0;
-    //      }
-         
-    //      if(n<0)
-    //      return 0;
-    //      else if(dp[n+1][W]!=-1)
-    //      return dp[n+1][W];
-    //      else if(wt[n]<=W)
-    //      {
-    //          int take = val[n] + check(W-wt[n], wt, val, n-1, dp);
-    //          int nottake = check(W, wt, val, n-1, dp);
-    //          return dp[n+1][W] = Math.max(take, nottake);
-    //      }
-    //      else
-    //      {
-    //          return dp[n+1][W] = check(W, wt, val, n-1, dp);
-    //      }
-    // }
+    
 }
 
 
